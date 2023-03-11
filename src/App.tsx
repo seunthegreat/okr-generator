@@ -1,9 +1,10 @@
-import { Header } from "./components"
+import { Generator, Header } from "./components";
 
 const App = (): JSX.Element => {
   return (
-    <div className="min-h-screen flex justify-center items-center bg-primary">
+    <div className="h-screen flex flex-col justify-center items-center bg-primary">
       <Header />
+      <Generator />
     </div>
   )
 }

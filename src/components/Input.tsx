@@ -14,7 +14,7 @@ const Input: FC<Props> = ({ placeholder, value, onChange, onClickGenerate }) => 
   };
 
   return (
-    <div className='border-r-[2px]'>
+    <div className='border-r-[1px]'>
       <div className='p-5 py-10 h-96'>
         <textarea
           placeholder={placeholder}

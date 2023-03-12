@@ -4,6 +4,7 @@ import { Input, KeyResults } from '.';
 import { contents } from '../constants';
 
 const { placeholder } = contents.input;
+const { mock } = contents.keyResults;
 type Props = {}
 
 const Generator = (props: Props) => {
@@ -25,8 +26,9 @@ const Generator = (props: Props) => {
           onChange={handleObjectiveChange} 
           onClickGenerate={handleGenerate}
           />
-        <KeyResults />
+        <KeyResults data={mock}/>
       </div>
+      
     </div>
   )
 }

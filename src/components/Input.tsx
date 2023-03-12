@@ -34,13 +34,16 @@ const Input: FC<Props> = ({ placeholder, value, onChange, onClickGenerate, onCli
             </button>
           </div>
         )}
-        <div className='flex flex-row justify-end'>
+       { !showResults && (
+          <div className='flex flex-row justify-end'>
           <button
             onClick={onClickGenerate}
             className='bg-white absolute bottom-3 rounded-[40px] flex hover:bg-transparent hover:border hover:border-[1px]'>
             <p className={`${text.small} text-primary font-semibold hover:text-white p-2 sm:px-10 px-5`}>Generate</p>
           </button>
         </div>
+        )
+       }
       </div>
     </div>
   )

@@ -6,9 +6,8 @@ import { krList } from '../constants';
 
 const { placeholder } = contents.input;
 const { mock } = contents.keyResults;
-type Props = {}
 
-const Generator = (props: Props) => {
+const Generator = (): JSX.Element => {
   const [objective, setObjective] = useState<string>('');
   const [generateResults, setGenerateResults] = useState<boolean>(false); 
   const [demoMode, setDemoMode] = useState<boolean>(false);
@@ -33,6 +32,13 @@ const Generator = (props: Props) => {
   const handleTryDemo = (): void => {
    setDemoMode(true);
    setObjective("Learn DevOps Engineering");
+  };
+
+  const handleRefresh = (): void => {
+    setObjective('');
+    setResults([]);
+    setGenerateResults(false);
+    if (demoMode) return setDemoMode(false);
   }
 
   return (
@@ -46,7 +52,12 @@ const Generator = (props: Props) => {
           onClickTryDemo={handleTryDemo}
           showResults={generateResults}
           />
-        <KeyResults data={results} showResults={generateResults} loading={loading}/>
+        <KeyResults 
+          data={results} 
+          showResults={generateResults} 
+          loading={loading}
+          onClickRefresh={handleRefresh}
+        />
       </div>
       
     </div>

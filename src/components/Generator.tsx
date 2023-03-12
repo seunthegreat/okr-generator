@@ -8,25 +8,34 @@ const { mock } = contents.keyResults;
 type Props = {}
 
 const Generator = (props: Props) => {
-  const [objective, setObjective] = useState('');
+  const [objective, setObjective] = useState<string>('');
+  const [generateResults, setGenerateResults] = useState<boolean>(false); 
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const handleObjectiveChange = (value: string) => {
+  const handleObjectiveChange = (value: string): void => {
     setObjective(value)
   };
 
-  const handleGenerate = () => {
-    console.log("Objective: ",objective)
+  const handleGenerate = (): void => {
+    setGenerateResults(true);
+  };
+
+  const handleTryDemo = (): void => {
+   setObjective("Learn DevOps Engineering");
   }
+
   return (
-    <div className='h-96 flex flex-col w-full px-20'>
-      <div className='border rounded-[10px] h-full grid grid-cols-2 '>
+    <div className='flex flex-col w-full px-20'>
+      <div className='border rounded-[10px] grid grid-cols-2 '>
         <Input 
           placeholder={placeholder} 
           value={objective} 
           onChange={handleObjectiveChange} 
           onClickGenerate={handleGenerate}
+          onClickTryDemo={handleTryDemo}
+          showResults={generateResults}
           />
-        <KeyResults data={mock}/>
+        <KeyResults data={mock} showResults={generateResults} loading={loading}/>
       </div>
       
     </div>

@@ -29,10 +29,10 @@ export const contents: ContentProps = {
   }, 
   keyResults: {
     mock: [
-      { id: 1, result: "Something Goes Here!" },
-      { id: 1, result: "Something Goes Here!" },
-      { id: 1, result: "Something Goes Here!" },
-      { id: 1, result: "Something Goes Here!" },
+      { id: 1, result: "Learn the fundamentals of DevOps within the next 2 months by completing an online course with a minimum score of 90%." },
+      { id: 1, result: "Build a pipeline for a simple application deployment within the next 3 months, using popular tools like Jenkins or GitLab." },
+      { id: 1, result: "Collaborate with a team on a complex DevOps project within the next 6 months, utilizing containerization technologies like Docker and Kubernetes." },
+      { id: 1, result: "Obtain certification in at least one popular DevOps tool or technology within the next 9 months, such as AWS or Terraform, to demonstrate proficiency to potential employers." },
     ]
   }
 };

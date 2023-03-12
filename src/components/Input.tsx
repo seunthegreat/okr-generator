@@ -30,7 +30,7 @@ const Input: FC<Props> = ({ placeholder, value, onChange, onClickGenerate, onCli
             <button
               onClick={onClickTryDemo}
               className='rounded-[10px] flex flex-row items-center justify-center border border-[1px]'>
-              <p className='font-normal text-white p-2 px-5'>Try Demo</p>
+              <p className={`text-white p-2 px-5`}>Try Demo</p>
             </button>
           </div>
         )}
@@ -38,7 +38,7 @@ const Input: FC<Props> = ({ placeholder, value, onChange, onClickGenerate, onCli
           <button
             onClick={onClickGenerate}
             className='bg-white absolute bottom-3 rounded-[40px] flex hover:bg-transparent hover:border hover:border-[1px]'>
-            <p className='font-semibold hover:text-white p-2 px-10'>Generate</p>
+            <p className={`${text.small} text-primary font-semibold hover:text-white p-2 sm:px-10 px-5`}>Generate</p>
           </button>
         </div>
       </div>

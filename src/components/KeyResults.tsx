@@ -11,7 +11,7 @@ type Props = {
 
 const KeyResults: FC<Props> = ({data, showResults, loading}) => {
   return (
-    <div className='p-5 py-10 flex-grow flex flex-col py-10 mb-10'>
+    <div className={`${showResults && 'p-5 py-10 mb-10'}flex-grow flex flex-col`}>
       {loading && 
         <div>
           <Player
@@ -23,7 +23,7 @@ const KeyResults: FC<Props> = ({data, showResults, loading}) => {
         />
         </div>
       }
-      {showResults && !loading &&
+      {showResults && !loading ?
         <>
         <p className={`${text.normal} font-bold`}>
           Key Measurable Results
@@ -38,6 +38,12 @@ const KeyResults: FC<Props> = ({data, showResults, loading}) => {
           ))}
         </div>
       </>
+       : 
+      <div className='flex flex-col w-full sm:h-full h-0 sm:p-5 sm:pt-10 p-0 '>
+        <div className='bg-white opacity-10 sm:w-full w-0 h-5 rounded-[5px] mb-3'/>
+        <div className='bg-white opacity-10 sm:w-[80%] w-0 h-5 rounded-[5px] mb-3'/>
+        <div className='bg-white opacity-10 sm:w-[60%] w-0 h-5 rounded-[5px] mb-3'/>
+      </div>
       }
    </div>
   )

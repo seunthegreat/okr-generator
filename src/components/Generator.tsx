@@ -18,7 +18,7 @@ const Generator = (): JSX.Element => {
     setObjective(value)
   };
 
-  const handleGenerate = (): void => {
+  const handleGenerate = async () => {
     //--If user clicks on demo, render mock result--//
     if (demoMode) {
       setGenerateResults(true);
@@ -26,7 +26,36 @@ const Generator = (): JSX.Element => {
       return
     }
    
-    console.log("API CAll here")
+    console.log("is loading");
+    setLoading(true);
+
+    const form = { objective: objective };
+    try {
+      //--Fetch--//
+      const response = await fetch('http://localhost:5173/generate-key-results', {
+        method: 'POST',
+        body: JSON.stringify(form),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      // process the response as needed
+      const results = await response.json();   
+      const { data, success} = results;
+      setLoading(false);
+
+      if (success) {
+        setGenerateResults(true);
+        setResults(data);
+        
+        console.log(results)
+      };
+
+      
+
+    }catch (error) {
+      console.error(error);
+    }
   };
 
   const handleTryDemo = (): void => {
@@ -51,6 +80,7 @@ const Generator = (): JSX.Element => {
           onClickGenerate={handleGenerate}
           onClickTryDemo={handleTryDemo}
           showResults={generateResults}
+          loading={loading}
           />
         <KeyResults 
           data={results} 

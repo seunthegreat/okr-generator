@@ -1,5 +1,5 @@
 export interface krList {
-  id: number;
+  id: string;
   result: string;
 }
 
@@ -25,14 +25,14 @@ export const contents: ContentProps = {
       for yourself.`
   },
   input: {
-    placeholder: `Enter your key objectives and key results here, separated by a comma. For example: Increase website traffic by 50%, Launch new product by Q3, Improve customer satisfaction score to 90%.`
+    placeholder: `Enter your key objective. For example: Learn to trade Forex.`
   }, 
   keyResults: {
     mock: [
-      { id: 1, result: "Learn the fundamentals of DevOps within the next 2 months by completing an online course with a minimum score of 90%." },
-      { id: 1, result: "Build a pipeline for a simple application deployment within the next 3 months, using popular tools like Jenkins or GitLab." },
-      { id: 1, result: "Collaborate with a team on a complex DevOps project within the next 6 months, utilizing containerization technologies like Docker and Kubernetes." },
-      { id: 1, result: "Obtain certification in at least one popular DevOps tool or technology within the next 9 months, such as AWS or Terraform, to demonstrate proficiency to potential employers." },
+      { id: 'xxxdf', result: "1. Learn the fundamentals of DevOps within the next 2 months by completing an online course with a minimum score of 90%." },
+      { id: 'sdrew', result: "2. Build a pipeline for a simple application deployment within the next 3 months, using popular tools like Jenkins or GitLab." },
+      { id: 'dfser', result: "3. Collaborate with a team on a complex DevOps project within the next 6 months, utilizing containerization technologies like Docker and Kubernetes." },
+      { id: 'sdfsdf', result: "4. Obtain certification in at least one popular DevOps tool or technology within the next 9 months, such as AWS or Terraform, to demonstrate proficiency to potential employers." },
     ]
   }
 };

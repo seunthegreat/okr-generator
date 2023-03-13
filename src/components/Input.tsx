@@ -8,43 +8,49 @@ interface Props {
   onClickGenerate: (event: MouseEvent<HTMLButtonElement>) => void;
   onClickTryDemo: (event: MouseEvent<HTMLButtonElement>) => void;
   showResults: boolean;
+  loading: boolean;
 }
 
-const Input: FC<Props> = ({ placeholder, value, onChange, onClickGenerate, onClickTryDemo, showResults }) => {
+const Input: FC<Props> = ({ placeholder, value, onChange, onClickGenerate, onClickTryDemo, showResults, loading }) => {
   const handleOnChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     onChange(event.target.value);
   };
 
   return (
-    <div className='border-r-[1px]'>
-      <div className={`p-5 py-10 ${!showResults ? 'h-80' : 'h-full'} flex flex-col relative`}>
-        <textarea
-          placeholder={placeholder}
-          className={`${text.small} outline-none bg-primary flex-grow w-full text-dimWhite leading-5 relative`}
-          value={value}
-          onChange={handleOnChange}
-        />
+    <div className={`border-r-[1px] w-full flex flex-grow flex-col `}>
+      <div className={`p-5 sm:pt-10 pt-5 flex flex-col ${!showResults ? 'h-80' : ''}`}>
+        <div className='flex mb-3'>
+          <textarea
+            placeholder={placeholder}
+            className={`${text.small}flex flex-grow outline-none bg-primary w-full text-dimWhite leading-5`}
+            value={value}
+            onChange={handleOnChange}
+          />
+        </div>
 
         {value == '' && (
-          <div className="h-3/4 opacity-50 py-5">
+          <div className="opacity-50 flex">
             <button
               onClick={onClickTryDemo}
-              className='rounded-[10px] flex flex-row items-center justify-center border border-[1px]'>
-              <p className={`text-white p-2 px-5`}>Try Demo</p>
+              className='rounded-[10px] py-2 px-5 flex flex-row items-center justify-center border border-[1px]'>
+              <p className={`text-white`}>Try Demo</p>
             </button>
           </div>
         )}
-       { !showResults && (
-          <div className='flex flex-row justify-end'>
-          <button
-            onClick={onClickGenerate}
-            className='bg-white absolute bottom-3 rounded-[40px] flex hover:bg-transparent hover:border hover:border-[1px]'>
-            <p className={`${text.small} text-primary font-semibold hover:text-white p-2 sm:px-10 px-5`}>Generate</p>
-          </button>
-        </div>
-        )
-       }
+
+        {!showResults && (
+          <div className={`w-full ${!showResults ? 'h-full' : ''} flex flex-col items-end justify-end`}>
+            <button
+              onClick={onClickGenerate}
+              className='bg-white rounded-[40px] flex flex-row hover:bg-transparent hover:border hover:border-[1px]'>
+              <p className={`${text.small} text-primary  font-semibold hover:text-white py-2 sm:px-10 px-5`}>
+                {!loading ? `Generate` : `Generating...`}
+              </p>
+            </button>
+          </div>
+        )}
       </div>
+
     </div>
   )
 };

@@ -88,7 +88,7 @@ const Generator = (): JSX.Element => {
           loading={loading}
           />
         <KeyResults 
-          data={results} 
+          results={results} 
           showResults={generateResults} 
           loading={loading}
           onClickRefresh={handleRefresh}

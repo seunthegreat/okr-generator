@@ -2,10 +2,11 @@ import React, { FC, MouseEvent} from 'react';
 import { text } from '../style';
 import { krList } from "../constants";
 import { Player } from '@lottiefiles/react-lottie-player';
-import { ResultList } from '.';
+import { ResultList, Tasklist } from '.';
 
 type Props = {
-  data: krList[], 
+  results: krList[],
+  taskList: any, 
   showResults: boolean,
   loading: boolean,
   onClickRefresh: (event: MouseEvent<HTMLButtonElement>) => void;
@@ -22,7 +23,7 @@ const tabBar : TabBarProps[] = [
   {id: 'task-list', name: 'Tasklist'},
 ]
 
-const KeyResults: FC<Props> = ({data, showResults, loading, onClickRefresh, onClickTab, currentTab}) => {
+const KeyResults: FC<Props> = ({results, showResults, loading, onClickRefresh, onClickTab, currentTab}) => {
   return (
     <div className={`${showResults && 'p-5 pt-10 mb-10'}flex-grow flex flex-col`}>
       {loading && 
@@ -52,7 +53,8 @@ const KeyResults: FC<Props> = ({data, showResults, loading, onClickRefresh, onCl
         </div>
 
         <div className='h-80'>
-          {currentTab == 'results' && <ResultList data={data}/>}
+          {currentTab == 'results' && <ResultList results={results}/> }
+          {currentTab == 'task-list' && <Tasklist /> }
 
         </div>
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { text } from '../style';
-import { Input, KeyResults } from '.';
+import { Input, KeyResults, Tasklist } from '.';
 import { contents } from '../constants';
 import { krList } from '../constants';
 
@@ -13,6 +13,7 @@ const Generator = (): JSX.Element => {
   const [demoMode, setDemoMode] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [results, setResults] = useState<krList[]>([]);
+  const [currentTab, setCurrentTab] = useState('results');
 
   const handleObjectiveChange = (value: string): void => {
     setObjective(value)
@@ -68,7 +69,11 @@ const Generator = (): JSX.Element => {
     setResults([]);
     setGenerateResults(false);
     if (demoMode) return setDemoMode(false);
-  }
+  };
+
+  const handleTabClick = (tabName:string) => {
+    setCurrentTab(tabName);
+  };
 
   return (
     <div className='flex flex-col w-full sm:px-20 px-5'>
@@ -87,8 +92,13 @@ const Generator = (): JSX.Element => {
           showResults={generateResults} 
           loading={loading}
           onClickRefresh={handleRefresh}
+          currentTab={currentTab}
+          onClickTab={handleTabClick}
         />
+
       </div>
+
+      {/* <Tasklist /> */}
       
     </div>
   )

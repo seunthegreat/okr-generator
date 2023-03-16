@@ -8,9 +8,20 @@ type Props = {
   showResults: boolean,
   loading: boolean,
   onClickRefresh: (event: MouseEvent<HTMLButtonElement>) => void;
-}
+  onClickTab: (tabName: string) => void;
+  currentTab: string;
+};
 
-const KeyResults: FC<Props> = ({data, showResults, loading, onClickRefresh}) => {
+type TabBarProps = {
+  id: string;
+  name: string;
+};
+const tabBar : TabBarProps[] = [
+  {id: 'results', name: 'Key Results'},
+  {id: 'task-list', name: 'Tasklist'},
+]
+
+const KeyResults: FC<Props> = ({data, showResults, loading, onClickRefresh, onClickTab, currentTab}) => {
   return (
     <div className={`${showResults && 'p-5 pt-10 mb-10'}flex-grow flex flex-col`}>
       {loading && 
@@ -26,17 +37,31 @@ const KeyResults: FC<Props> = ({data, showResults, loading, onClickRefresh}) => 
       }
       {showResults && !loading &&
         <>
-        <p className={`${text.normal} font-bold`}>
-          Key Measurable Results
-        </p>
-
-        <div className='flex flex-col mt-5'>
-          {data.map((item, index) => (
-            <div className='bg-white p-3 rounded-[5px] mb-2 hover:bg-[#def9fa] flex flex-row' key={index}>
-              <p className={`${text.normal} text-primary mr-2`}>{index + 1}.</p>
-              <p className={`${text.normal} text-primary`}>{item.result.substring(3)}</p>
-            </div>
+        <div className='flex flex-row'>
+          {tabBar.map((tab, index) => (
+            <button
+              onClick={() => onClickTab(tab.id)}
+              key={index}
+              className={`mr-3 ${currentTab == tab.id && 'border-b-[1.5px] border-secondary'}`}>
+              <p className={`${text.normal} hover:text-secondary`}>
+                {tab.name}
+              </p>
+            </button>
           ))}
+        </div>
+
+        <div className='h-80'>
+          {currentTab == 'results' && (
+            <div className='flex flex-col mt-5'>
+              {data.map((item, index) => (
+                <div className='bg-white p-3 rounded-[5px] mb-2 hover:bg-[#def9fa] flex flex-row' key={index}>
+                  <p className={`${text.normal} text-primary mr-2`}>{index + 1}.</p>
+                  <p className={`${text.normal} text-primary`}>{item.result.substring(3)}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
         </div>
 
         <div className='sm:h-20 h-10 flex flex-col items-end justify-end'>

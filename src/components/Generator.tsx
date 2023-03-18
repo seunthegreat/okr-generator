@@ -13,7 +13,13 @@ const Generator = (): JSX.Element => {
   const [demoMode, setDemoMode] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [results, setResults] = useState<krList[]>([]);
+  const [taskList, setTaskList] = useState([]);
   const [currentTab, setCurrentTab] = useState('results');
+  const [noTaskList, setNoTaskList] = useState<boolean>(true);
+  
+  const handleGenerateTaskList = ():void => {
+    setNoTaskList(false);
+  }
 
   const handleObjectiveChange = (value: string): void => {
     setObjective(value)
@@ -89,17 +95,17 @@ const Generator = (): JSX.Element => {
           />
         <KeyResults 
           results={results} 
+          taskList={taskList}
           showResults={generateResults} 
           loading={loading}
           onClickRefresh={handleRefresh}
           currentTab={currentTab}
           onClickTab={handleTabClick}
+          noTaskList={noTaskList}
+          onGenerateTaskList={handleGenerateTaskList}
         />
 
-      </div>
-
-      {/* <Tasklist /> */}
-      
+      </div>      
     </div>
   )
 }

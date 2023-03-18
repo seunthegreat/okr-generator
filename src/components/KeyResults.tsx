@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent} from 'react';
+import React, { FC, MouseEvent, useState} from 'react';
 import { text } from '../style';
 import { krList } from "../constants";
 import { Player } from '@lottiefiles/react-lottie-player';
@@ -7,11 +7,13 @@ import { ResultList, Tasklist } from '.';
 type Props = {
   results: krList[],
   taskList: any, 
+  noTaskList: boolean,
   showResults: boolean,
   loading: boolean,
   onClickRefresh: (event: MouseEvent<HTMLButtonElement>) => void;
   onClickTab: (tabName: string) => void;
   currentTab: string;
+  onGenerateTaskList: (event: MouseEvent<HTMLButtonElement>) => void;
 };
 
 type TabBarProps = {
@@ -23,7 +25,11 @@ const tabBar : TabBarProps[] = [
   {id: 'task-list', name: 'Tasklist'},
 ]
 
-const KeyResults: FC<Props> = ({results, showResults, loading, onClickRefresh, onClickTab, currentTab}) => {
+const KeyResults: FC<Props> = ({results, taskList, showResults, loading, onClickRefresh, 
+  onClickTab, currentTab, onGenerateTaskList, noTaskList}) => {
+  
+ 
+
   return (
     <div className={`${showResults && 'p-5 pt-10 mb-10'}flex-grow flex flex-col`}>
       {loading && 
@@ -54,11 +60,17 @@ const KeyResults: FC<Props> = ({results, showResults, loading, onClickRefresh, o
 
         <div className='h-80'>
           {currentTab == 'results' && <ResultList results={results}/> }
-          {currentTab == 'task-list' && <Tasklist /> }
-
+          {
+            currentTab == 'task-list' &&
+            <Tasklist
+              taskList={taskList}
+              onGenerateTaskList={onGenerateTaskList}
+              noTaskList={noTaskList}
+            />
+          }
         </div>
 
-        <div className='sm:h-20 h-10 flex flex-col items-end justify-end'>
+        <div className='sm:h-16 h-10 flex flex-col items-end justify-end'>
           <div className='flex flex-row justify-end '>
             <button
               onClick={onClickRefresh}
